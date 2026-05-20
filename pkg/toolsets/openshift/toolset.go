@@ -21,7 +21,17 @@ func (t *Toolset) GetDescription() string {
 }
 
 func (t *Toolset) GetTools(o api.Openshift) []api.ServerTool {
-	return nil
+	return slices.Concat(
+		initClusterStatus(),
+		initOLM(),
+		initMachines(),
+		initBuildsAndImages(),
+		initObservability(),
+		initConfigResources(),
+		initCertificates(),
+		initAPIDiscovery(),
+		initRBAC(),
+	)
 }
 
 func (t *Toolset) GetPrompts() []api.ServerPrompt {
